@@ -1,0 +1,58 @@
+<div class="contact-page">
+  <div class="contact-container">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you! Reach out to us with any questions or feedback.</p>
+
+    <!-- Contact Form -->
+    <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+      <div class="form-field">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" [(ngModel)]="contact.name" required placeholder="Enter your name" />
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" [(ngModel)]="contact.email" required
+          placeholder="Enter your email" />
+      </div>
+
+      <div class="form-field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" [(ngModel)]="contact.message" required
+          placeholder="Write your message here"></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="!contactForm.valid">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal" [class.show]="isModalVisible" (click)="closeModal($event)">
+  <div class="modal-content">
+    <!-- Close Button -->
+    <span class="close-btn" (click)="closeModal($event, true)">×</span>
+
+    <!-- Modal Content for Success (Green Tick) -->
+    <div *ngIf="modalSuccess" class="tick-container">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40">
+        <circle cx="12" cy="12" r="11" fill="none" stroke="#128c39" stroke-width="2" />
+        <path class="check" fill="none" stroke="#128c39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          d="M6 12l4 4 8-8" />
+      </svg>
+    </div>
+
+    <!-- Modal Content for Error (Red X) -->
+    <div *ngIf="modalError" class="x-container">
+      <svg class="red-x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40">
+        <circle cx="12" cy="12" r="11" fill="none" stroke="#e53935" stroke-width="2" />
+        <path class="x" fill="none" stroke="#e53935" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          d="M6 6l12 12M18 6L6 18" />
+      </svg>
+    </div>
+
+    <h2>{{ modalSuccess ? 'Successful!' : 'Error!' }}</h2>
+    <p>{{ modalMessage }}</p>
+    <button (click)="closeModal($event, true)">Close</button>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<header id="header">
+    <nav class="menu">
+        <ul class="menu-left">
+            <li><a href="/" routerLinkActive="active">Home</a></li>
+            <li><a href="/about" routerLinkActive="active">About</a></li>
+            <li><a href="/shop" routerLinkActive="active">Shop</a></li>
+            <li><a href="/contact" routerLinkActive="active">Contact</a></li>
+        </ul>
+        <div class="menu-right">
+            <a class="icon-button" (click)="toggleCard()">
+                <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+            </a>
+            <ng-container *ngIf="!isLoggedIn">
+                <ng-template #loginButton>
+                    <a href="/login" class="button">Login</a>
+                </ng-template>
+                <ng-container *ngTemplateOutlet="loginButton"></ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="isLoggedIn">
+                <div class="account-container">
+                    <!-- Circle account image -->
+                    <img src="assets/images/account-image.jpg" alt="Account" class="account-image"
+                        (click)="toggleDropdown()" />
+
+                    <!-- Dropdown menu -->
+                    <div class="dropdown-menu" [class.show]="isDropdownVisible">
+                        <ul>
+                            <li><a href="/wishlist">Wishlist</a></li>
+                            <li><a href="/addresses">Addresses</a></li>
+                            <hr />
+                            <li><a (click)="logout()">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </nav>
+</header>
+
+<!-- Overlay and Floating Card -->
+<div class="overlay" [class.show]="isCardOpen" (click)="closeCard()"></div>
+<!-- Floating Card -->
+<div class="floating-card" [class.show]="isCardOpen">
+    <div class="card-header">
+        <h3>Your Cart</h3>
+        <button class="close-btn" (click)="closeCard()">✕</button>
+    </div>
+
+    <!-- Error Message -->
+    <ng-container *ngIf="hasError">
+        <div class="error-message">
+            <h3>ERROR</h3>
+            <p>{{ errorMessage }}</p>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="!isLoggedIn && !hasError">
+        <!-- Login Reminder if not logged in -->
+        <ng-template #loginReminder>
+            <div class="login-reminder">
+                <p>Please log in to view your cart and proceed to checkout.</p>
+                <a href="/login" class="material-btn">Login</a>
+            </div>
+        </ng-template>
+        <ng-container *ngTemplateOutlet="loginReminder"></ng-container>
+    </ng-container>
+
+    <!-- Cart Content -->
+    <ng-container *ngIf="isLoggedIn && !hasError">
+        <div class="card-content">
+            <div *ngFor="let item of cartItems; let i = index" class="data-card" [class.removing]="item.removing">
+                <div class="data-card-details">
+                    <h4>{{ item.title }}</h4>
+                    <p class="price">${{ item.price.toFixed(2) }}</p>
+                    <div class="quantity-control">
+                        <button class="decrease-btn" (click)="decreaseQuantity(i)">−</button>
+                        <span class="quantity">{{ item.quantity }}</span>
+                        <button class="increase-btn" (click)="increaseQuantity(i)">+</button>
+                    </div>
+                </div>
+                <button class="delete-btn" (click)="removeItem(i)">✕</button>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="cart-summary">
+                <h4>Total: <span class="animated-price">${{ animatedTotalPrice }}</span></h4>
+                <!--<button class="material-btn" (click)="goToCheckout()">Go to Checkout</button>-->
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<!-- Modal HTML -->
+<div class="modal" [class.show]="isModalOpen" (click)="isModalOpen = false">
+    <div class="modal-content">
+        <h3>Are you sure?</h3>
+        <div class="modal-buttons">
+            <button class="modal-btn move-to-wishlist" (click)="moveToWishlist()">Move to Wishlist</button>
+            <button class="modal-btn delete" (click)="deleteItem()">Delete</button>
+            <button class="modal-btn cancel" (click)="isModalOpen = false">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">

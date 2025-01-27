@@ -1,0 +1,92 @@
+<!-- src/app/address-manager/address-manager.component.html -->
+<div class="container">
+  <h2>Manage Addresses</h2>
+  <button class="add-button" (click)="addAddress()">Add Address</button>
+  <!-- Loading Indicator -->
+  <div *ngIf="loading" class="loading-message">Loading addresses...</div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="error-message">Error: {{ error }}</div>
+
+  <!-- Empty Address List Message -->
+  <div *ngIf="!loading && !error && !(addresses | async)?.length" class="no-addresses-message">
+    No addresses found. Please add one 😢.
+  </div>
+
+  <div class="address-list" *ngIf="!loading && !error && (addresses | async)!.length > 0">
+    <div *ngFor="let address of (addresses | async)" class="address-item" (click)="selectAddress(address)">
+      <p><strong>{{ address?.addressLine1 }}</strong></p>
+      <p>{{ address?.addressLine2 }}</p>
+      <p>{{ address?.city }}, {{ address?.stateProvince }} {{ address?.postalCode }}</p>
+      <p>{{ address?.countryRegion }}</p>
+    </div>
+  </div>
+
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <!-- Form for editing address (visible when isEditing is true) -->
+      <div *ngIf="isEditing">
+        <div class="form-group">
+          <label>Address Line 1:</label>
+          <input type="text" [(ngModel)]="selectedAddress!.addressLine1">
+        </div>
+        <div class="form-group">
+          <label>Address Line 2:</label>
+          <input type="text" [(ngModel)]="selectedAddress!.addressLine2">
+        </div>
+        <div class="form-group">
+          <label>City:</label>
+          <input type="text" [(ngModel)]="selectedAddress!.city">
+        </div>
+        <div class="form-group">
+          <label>State/Province:</label>
+          <input type="text" [(ngModel)]="selectedAddress!.stateProvince">
+        </div>
+        <div class="form-group">
+          <label>Country/Region:</label>
+          <input type="text" [(ngModel)]="selectedAddress!.countryRegion">
+        </div>
+        <div class="form-group">
+          <label>Postal Code:</label>
+          <input type="text" [(ngModel)]="selectedAddress!.postalCode">
+        </div>
+      </div>
+
+
+      <!-- Form for adding a new address (visible when isEditing is false) -->
+      <div *ngIf="!isEditing">
+        <div class="form-group">
+          <label>Address Line 1:</label>
+          <input type="text" [(ngModel)]="newAddress.addressLine1">
+        </div>
+        <div class="form-group">
+          <label>Address Line 2:</label>
+          <input type="text" [(ngModel)]="newAddress.addressLine2">
+        </div>
+        <div class="form-group">
+          <label>City:</label>
+          <input type="text" [(ngModel)]="newAddress.city">
+        </div>
+        <div class="form-group">
+          <label>State/Province:</label>
+          <input type="text" [(ngModel)]="newAddress.stateProvince">
+        </div>
+        <div class="form-group">
+          <label>Country/Region:</label>
+          <input type="text" [(ngModel)]="newAddress.countryRegion">
+        </div>
+        <div class="form-group">
+          <label>Postal Code:</label>
+          <input type="text" [(ngModel)]="newAddress.postalCode">
+        </div>
+      </div>
+
+      <div class="modal-buttons">
+        <button class="save-button" (click)="saveAddress()">Save</button>
+        <button class="cancel-button" (click)="closeModal()">Cancel</button>
+        <button *ngIf="isEditing" class="delete-button" (click)="deleteAddress(selectedAddress!)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div class="overlay" *ngIf="showModal" (click)="closeModal()"></div>
+</div>

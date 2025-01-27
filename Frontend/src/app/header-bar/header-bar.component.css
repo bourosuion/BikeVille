@@ -1,0 +1,654 @@
+/* General styles */
+header {
+    position: fixed;
+    top: 0;
+    width: 98%;
+    /* Dark grey with some transparency */
+    color: #e0e0e0;
+    /* Light grey text */
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: border-radius 0.3s ease, width 0.3s ease, box-shadow 0.3s ease,
+        background 0.3s ease, margin 0.3s ease;
+    /* Apply a blur to the background*/
+}
+
+header.rounded {
+    border-radius: 8px;
+    width: 95%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    /* Subtle shadow */
+    margin: 1%;
+    background: #212121;
+    /* Solid dark background */
+}
+
+/* Flex container for nav */
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.menu-left li {
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-left li:hover {
+    transform: scale(1.05);
+}
+
+
+.menu-right a {
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-right a:hover {
+    transform: scale(1.05);
+}
+
+
+/* Left-side menu styles */
+.menu-left {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-left li {
+    margin-right: 15px;
+}
+
+.menu-left li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-left li a:hover {
+    background-color: rgba(76, 175, 242, 0.15);
+    /* Light blue hover */
+}
+
+
+/* Right-side menu styles */
+.menu-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-right .button {
+    color: #e0e0e0;
+    text-decoration: none;
+    background: transparent;
+    padding: 8px 16px;
+    margin-left: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-right .button:hover {
+    background-color: rgba(76, 175, 242, 0.15);
+    /* Light blue hover */
+}
+
+.active {
+    font-weight: bold;
+    color: #4caf50;
+    /* Green active color */
+}
+
+
+.menu-right .icon-button {
+    color: #e0e0e0;
+    text-decoration: none;
+    background: transparent;
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.menu-right .icon-button:hover {
+    transform: scale(1.1);
+    background-color: rgba(76, 175, 242, 0.15);
+    /* Light blue hover */
+}
+
+.menu-right .fa-chart-bar {
+    font-size: 1.2rem;
+}
+
+/* Overlay (background blackening effect) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    /* Slightly lighter overlay */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;
+    backdrop-filter: blur(5px);
+    /* Apply a blur to the background*/
+}
+
+
+.overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Floating Card */
+.floating-card {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 320px;
+    height: 100%;
+    background: #212121;
+    /* Dark background */
+    color: #e0e0e0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2), 0px 1px 3px rgba(0, 0, 0, 0.1);
+    transform: translateX(0);
+    transition: right 0.3s ease-in-out, background 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    overflow-y: auto;
+}
+
+/* Show the card */
+.floating-card.show {
+    right: 0;
+}
+
+/* Card Header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #303030;
+    /* Slightly lighter dark header */
+    color: #ffffff;
+    border-bottom: 1px solid #424242;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #42a5f5;
+    /* Blue hover for close */
+}
+
+/* Card Content */
+.card-content {
+    padding: 16px;
+    flex-grow: 1;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    color: #cfcfcf;
+}
+
+.card-content p {
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+
+/* Links inside the content */
+.card-content a {
+    color: #42a5f5;
+    /* Blue link color */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.card-content a:hover {
+    color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .floating-card {
+        width: 90%;
+    }
+}
+
+/* Material Design Button (optional, can style the close button or actions) */
+.material-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #303030;
+    /* Slightly lighter dark button */
+    color: #42a5f5;
+    /* Blue button text */
+    border: none;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.material-btn:hover {
+    background: #424242;
+    /* Darker hover button */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Data Cards */
+.data-card {
+    background: #303030;
+    /* Dark background */
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.data-card:hover {
+    background: #3d3d3d;
+}
+
+
+.data-card-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.data-card-details h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #e0e0e0;
+}
+
+.data-card-details .price {
+    margin: 4px 0 0;
+    font-size: 0.95rem;
+    color: #42a5f5;
+    /* Blue price color */
+}
+
+/* Cart Summary */
+.cart-summary {
+    margin-top: 20px;
+    padding: 16px;
+    border-top: 1px solid #424242;
+    /* Dark border */
+    background: #212121;
+    /* Dark background */
+    text-align: center;
+}
+
+.cart-summary h4 {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+
+.cart-summary .material-btn {
+    width: 100%;
+    padding: 12px 0;
+    background: #42a5f5;
+    /* Blue button */
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-summary .material-btn:hover {
+    background: #1e5fcf;
+    /* Darker blue hover */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Login Reminder */
+.login-reminder {
+    text-align: center;
+    padding: 16px;
+    background: #303030;
+    border-radius: 8px;
+    color: #e0e0e0;
+}
+
+.login-reminder p {
+    margin-bottom: 16px;
+    font-size: 1rem;
+}
+
+
+.login-reminder .material-btn {
+    background: #42a5f5;
+    /* Blue button */
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.login-reminder .material-btn:hover {
+    background: #1e5fcf;
+    /* Darker blue hover */
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    gap: 8px;
+}
+
+.quantity-control button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #303030;
+    border: 1px solid #424242;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+
+.quantity-control button:hover {
+    background: #42a5f5;
+    /* Blue hover */
+}
+
+
+.quantity-control button:active {
+    transform: scale(0.95);
+}
+
+.quantity-control .quantity {
+    min-width: 24px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: #ff4f4f;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.delete-btn:hover {
+    color: #ff1f1f;
+}
+
+/* Animation for removing an item */
+.data-card.removing {
+    animation: fadeOutSlide 0.3s ease forwards;
+}
+
+@keyframes fadeOutSlide {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+/* Error Message Styles */
+.error-message {
+    padding: 20px;
+    background-color: #303030;
+    color: #ff6b6b;
+    border: 1px solid #ff6b6b;
+    border-radius: 8px;
+    margin: 16px 0;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.5s ease-in-out;
+    font-size: 18px;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Enhanced Dark Theme Modal CSS with Accent Colors */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal-content {
+    background-color: #212121;
+    color: #f1f1f1;
+    margin: 10% auto;
+    padding: 20px;
+    border: none;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    background-color: #303030;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.modal-btn.move-to-wishlist {
+    background-color: #42a5f5;
+    /* Blue color for Wishlist Button */
+}
+
+.modal-btn.delete {
+    background-color: #f44336;
+    /* Red color for delete button */
+}
+
+
+.modal-btn.cancel {
+    background-color: #555;
+}
+
+.modal-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #42a5f5;
+    /* Blue focus effect */
+}
+
+
+/* Container styling */
+.account-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* Circle account image styling */
+.account-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid #42a5f5;
+    /* Blue border */
+    box-shadow: 0 4px 10px rgba(66, 165, 245, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.account-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(66, 165, 245, 0.6);
+}
+
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #212121;
+    color: #ecf0f1;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    padding: 15px 20px;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu ul li {
+    margin: 15px 0;
+}
+
+.dropdown-menu ul li a {
+    text-decoration: none;
+    color: #42a5f5;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.dropdown-menu ul li a:hover {
+    background-color: #42a5f5;
+    color: #212121;
+}
+
+
+/* Animation class for showing the dropdown */
+.dropdown-menu.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Add a smooth bounce effect for the dropdown */
+@keyframes dropdown-slide {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-menu.show {
+    animation: dropdown-slide 0.5s ease;
+}

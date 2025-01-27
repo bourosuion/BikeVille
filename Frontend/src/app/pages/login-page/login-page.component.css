@@ -1,0 +1,568 @@
+/* styles.css */
+.main {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+        position: relative;
+}
+
+.main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #42a5f5, #2979ff, #1e88e5, #42a5f5);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.main:hover::before {
+    opacity: 0.1;
+    transform: scale(1.02);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    background-color: #1f1f1f;
+    padding-right: 100px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-width: 1100px;
+    width: 100%;
+    height: 80%;
+}
+
+.login-form {
+    scale: 1.1;
+    flex: 2;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s ease-in-out;
+    transform: translateX(45%);
+}
+
+.sign-in-form {
+    scale: 1.1;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s ease-in-out;
+    transform: translateX(150%);
+}
+
+.login-form.shifted {
+    transform: translateX(-100%);
+}
+
+.sign-in-form.shifted {
+    transform: translateX(0);
+}
+
+.image-section.shifted {
+    scale: 2.4;
+    transform: translateX(-50%);
+}
+
+.fade-out {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+@keyframes imageChange {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        scale: 1;
+    }
+
+    100% {
+        opacity: 1;
+        scale: 1.5;
+    }
+}
+
+.login-form h1 {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    color: #e0e0e0;
+}
+
+.login-form p {
+    margin-bottom: 1.8rem;
+    color: #b0b0b0;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+    color: #cfcfcf;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 6px;
+    border: none;
+    background-color: #2c2c2c;
+    color: #fff;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(66, 165, 245, 0.5);
+    border: 1px solid #42a5f5;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 3.5rem;
+    padding: 1rem 1.5rem;
+    margin-left: 5%;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #42a5f5;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+}
+
+.btn:hover::before {
+    transform: translateX(0);
+}
+
+.btn:hover {
+    background-color: #1e5fcf;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.button-loader {
+    display: none;
+    gap: 0.25rem;
+    visibility: hidden;
+}
+
+.btn.loading #login-btn-text {
+    visibility: hidden;
+    display: none;
+}
+
+.btn.loading .button-loader {
+    visibility: visible;
+    display: flex;
+}
+
+.btn.success {
+    background-color: #128c39;
+}
+
+.btn.error {
+    background-color: rgb(197, 26, 26);
+    animation: errorAnimation 0.2s 2 ease;
+}
+
+@keyframes errorAnimation {
+    0% {
+        transform: translate(0px);
+    }
+
+    25% {
+        transform: translate(6px, 4px);
+    }
+
+    75% {
+        transform: translate(-4px, -6px);
+    }
+
+    100% {
+        transform: translate(0px);
+    }
+}
+
+.button-loader div {
+    width: 0.8rem;
+    height: 0.8rem;
+    background-color: white;
+    border-radius: 50%;
+    animation: 1.2s infinite ease-in-out scaleUp;
+}
+
+.button-loader div:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.button-loader div:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes scaleUp {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+.image-section {
+    scale: 2.2;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s ease-in-out, scale 0.8s ease-in-out;
+    transform: translateX(130%);
+    position: relative;
+    overflow: hidden;
+}
+
+.image-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(66, 165, 245, 0.1));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.image-section:hover::before {
+    opacity: 1;
+}
+
+.image-section img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: cover;
+}
+
+/* Media query to hide the image on smaller screens */
+@media (max-width: 768px) {
+    .image-section {
+        display: none;
+    }
+
+    .login-form {
+        scale: 1;
+        flex: 3;
+        transform: translateX(70%);
+    }
+
+    .sign-in-form {
+        scale: 1;
+        flex: 3;
+    }
+
+    .container {
+        padding-left: 0;
+    }
+
+    .container {
+        overflow: auto;
+    }
+
+    .form-group-row {
+        flex-direction: column;
+    }
+
+    .form-group-row .form-group {
+        min-width: 100%;
+    }
+}
+
+/* Row for grouped inputs */
+.form-group-row {
+    display: flex;
+    gap: 4rem;
+    width: 100%;
+}
+
+/* Ensure inputs take equal space */
+.form-group-row .form-group {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1002;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    padding-top: 60px;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.modal.show {
+    display: block;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #1f1f1f;
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid #42a5f5;
+    width: 80%;
+    max-width: 500px;
+    max-height: 80vh;
+    border-radius: 10px;
+    color: #f0f0f0;
+    position: relative;
+    text-align: center;
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+    color: #f0f0f0;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1;
+}
+
+.close-btn:hover {
+    color: #42a5f5;
+}
+
+.modal-content h2 {
+    font-size: 1.7rem;
+    margin-bottom: 1.2rem;
+    color: #42a5f5;
+}
+
+.modal-content p {
+    margin-bottom: 1.5rem;
+    color: #bbb;
+}
+
+.modal-content button {
+    background-color: #42a5f5;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-content button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+}
+
+.modal-content button:hover::before {
+    transform: translateX(0);
+}
+
+.modal-content button:hover {
+    background-color: #1e5fcf;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Checkmark Animation (Green Tick) */
+.tick-container {
+    margin: 25px 0;
+    opacity: 0;
+    animation: tickAnimation 1s ease-out forwards;
+}
+
+@keyframes tickAnimation {
+    0% {
+        stroke-dasharray: 0, 100;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dasharray: 100, 100;
+        opacity: 1;
+    }
+}
+
+/* Red X Animation */
+.x-container {
+    margin: 25px 0;
+    opacity: 0;
+    animation: xAnimation 1s ease-out forwards;
+}
+
+@keyframes xAnimation {
+    0% {
+        stroke-dasharray: 0, 100;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dasharray: 100, 100;
+        opacity: 1;
+    }
+}
+
+.red-x {
+    stroke: #e53935;
+}
+
+.red-x path {
+    stroke-dasharray: 0, 100;
+    animation: redXAnimation 1s ease-out forwards;
+}
+
+@keyframes redXAnimation {
+    0% {
+        stroke-dasharray: 0, 100;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dasharray: 100, 100;
+        opacity: 1;
+    }
+}
+
+/* Dark theme styles for error message */
+.error-message {
+    background-color: #222222;
+    color: #e74c3c;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: 25px auto;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.error-message h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.error-message p {
+    font-size: 18px;
+    margin: 0;
+    padding-top: 10px;
+    line-height: 1.6;
+}
+
+.error-message .retry-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.error-message .retry-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+}
+
+.error-message .retry-button:hover::before {
+    transform: translateX(0);
+}
+
+.error-message .retry-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}

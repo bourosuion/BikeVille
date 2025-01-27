@@ -1,0 +1,157 @@
+<div class="shop-container">
+  <div class="left-column">
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input id="search-bar" type="text" (keyup)="fetchProductsWithFilters()" [(ngModel)]="searchValue" placeholder="Search products..." />
+    </div>
+
+    <!-- Floating Card -->
+    <div class="floating-card">
+      <h3>Filter Options</h3>
+
+      <!-- Dropdown Menu for Filters -->
+      <div class="collapsible-section">
+        <h4 class="section-title" (click)="toggleSection('filters')">
+          Filters
+          <span class="toggle-icon">{{ openSections['filters'] ? '▲' : '▼' }}</span>
+        </h4>
+        <div class="section-content" *ngIf="openSections['filters']">
+          <div class="dropdown-container">
+            <div *ngFor="let category of categories; let categoryIndex = index" class="dropdown">
+              <!-- Category Title -->
+              <button class="dropdown-button" (click)="toggleDropdown(category)">
+                {{ category.name }}
+              </button>
+
+              <!-- Dropdown Content -->
+              <div class="dropdown-content" *ngIf="category.open">
+                <span *ngFor="let item of category.items; let itemIndex = index" class="dropdown-item"
+                  (click)="selectFilterItem(categoryIndex, itemIndex, category.name, item)">
+                  {{ item }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Color Filters -->
+      <div class="collapsible-section">
+        <h4 class="section-title" (click)="toggleSection('colors')">
+          Colors
+          <span class="toggle-icon">{{ openSections['colors'] ? '▲' : '▼' }}</span>
+        </h4>
+        <div class="section-content" *ngIf="openSections['colors']">
+          <div class="color-filter-container">
+            <div class="color-swatches">
+              <div *ngFor="let color of colors" class="color-swatch"
+                [class.selected]="selectedColors.includes(color.name)" [style.background]="color.hex"
+                (click)="toggleColor(color.name)" title="{{ color.name }}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Size Filters -->
+      <div class="collapsible-section">
+        <h4 class="section-title" (click)="toggleSection('sizes')">
+          Sizes
+          <span class="toggle-icon">{{ openSections['sizes'] ? '▲' : '▼' }}</span>
+        </h4>
+        <div class="section-content" *ngIf="openSections['sizes']">
+          <div class="size-filters">
+            <div class="size-grid">
+              <span *ngFor="let size of availableSizes" class="size-option"
+                [class.selected]="isSizeSelected('sizes', size)" (click)="selectFilterSize('sizes', size)">
+                {{ size }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Price Slider -->
+      <div class="collapsible-section">
+        <h4 class="section-title" (click)="toggleSection('price')">
+          Price Range
+          <span class="toggle-icon">{{ openSections['price'] ? '▲' : '▼' }}</span>
+        </h4>
+        <div class="section-content" *ngIf="openSections['price']">
+          <div class="price-slider-container">
+            <label for="price-slider">Price Range:</label>
+            <input type="range" id="price-slider" (mouseup)="fetchProductsWithFilters()" [(ngModel)]="priceFilter" [min]="minPrice" [max]="maxPrice" />
+            <span>{{ priceFilter | currency }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!--<button class="apply-filters-btn" (click)="fetchProductsWithFilters()">Apply Filters</button>-->
+    </div>
+  </div>
+
+
+  <div class="right-column">
+    <!-- Loading overlay (initially visible) -->
+    <div *ngIf="isLoading" class="loading-overlay">
+      <video autoplay muted loop playsinline>
+        <source src="assets/videos/loading_animation.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="card-container">
+      <!-- Loop through the filtered cards and display them -->
+      <div class="card" *ngFor="let card of filteredCards" (click)="openPopup(card)">
+        <img [src]="card.image" alt="Product Image" class="card-image" />
+        <h2 class="card-title">{{ card.title }}</h2>
+        <p class="card-price">${{ card.price }}</p>
+      </div>
+    </div>
+
+    <!-- Pagination buttons at the bottom -->
+    <div class="pagination-buttons">
+      <button (click)="goToPreviousPage()" [disabled]="currentPage === 1" class="pagination-button">
+        Previous Page
+      </button>
+      <button (click)="goToNextPage()" class="pagination-button">
+        Next Page
+      </button>
+    </div>
+  </div>
+
+
+
+  <div class="modal" *ngIf="selectedProduct" (click)="closePopup($event)">
+    <div class="modal-content">
+      <!-- Left side: Product Information -->
+      <div class="modal-left">
+        <img [src]="selectedProduct.image" alt="Product Image" class="modal-image" />
+        <h2>{{ selectedProduct.title }}</h2>
+        <p>{{ selectedProduct.description }}</p>
+        <p><strong>Price:</strong> ${{ selectedProduct.price }}</p>
+      </div>
+
+      <!-- Right side: Action Buttons -->
+      <div class="modal-right">
+        <ng-container *ngIf="!isLoggedIn">
+          <!-- Login Reminder if not logged in -->
+          <ng-template #loginReminder>
+            <div class="login-reminder">
+              <p>Please log-in to use the cart or the wishlist.</p>
+              <a href="/login" class="material-btn">Login</a>
+            </div>
+          </ng-template>
+          <ng-container *ngTemplateOutlet="loginReminder"></ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn">
+          <button class="wishlist-button" (click)="addToWishlist(selectedProduct)" [class.clicked]="selectedProduct.isWishlisted">
+            <i class="fa fa-heart" aria-hidden="true"></i>
+          </button>
+          <button id="add-cart-button" class="cart-button" (click)="addToCart(selectedProduct)">Add to Cart</button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

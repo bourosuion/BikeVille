@@ -1,0 +1,338 @@
+/* src/app/address-manager/address-manager.component.css */
+.container {
+    font-family: 'Roboto', sans-serif;
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    padding: 40px;
+    /* Increased padding for a more spacious feel */
+    border-radius: 12px;
+    /* Increased border-radius for a softer appearance */
+    max-width: 900px;
+    margin: 50px auto;
+    margin-top: 80px;
+    /* Increased top margin for better spacing */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Refined shadow */
+    position: relative;
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+    /* Clip overflow content, needed for the new effect */
+    z-index: 1;
+    /* Ensure container is above background */
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* New gradient overlay for a modern touch */
+    z-index: -1;
+    /* Place behind the container */
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+
+.container:hover::before {
+    opacity: 0.1;
+}
+
+
+.container:hover {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+    /* Increased hover shadow */
+}
+
+
+h2 {
+    color: #42a5f5;
+    margin-bottom: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+
+.add-button {
+    background-color: #42a5f5;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    /* Slightly more rounded */
+    cursor: pointer;
+    margin-bottom: 25px;
+    /* Increased margin */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+
+.add-button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+}
+
+.add-button:hover:before {
+    transform: translateX(0);
+}
+
+
+.add-button:hover {
+    background-color: #1e5fcf;
+    transform: translateY(-3px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.address-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Increased min width */
+    gap: 20px;
+}
+
+.address-item {
+    background-color: #2a2a2a;
+    padding: 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Increased shadow */
+    position: relative;
+    overflow: hidden;
+}
+
+
+.address-item:hover {
+    background-color: #3d3d3d;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    /* Increased shadow */
+}
+
+
+.address-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(66, 165, 245, 0.1));
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+
+.address-item:hover::before {
+    opacity: 1;
+}
+
+
+.address-item p {
+    margin: 8px 0;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+
+.address-item p:first-child {
+    font-size: 1.15em;
+    font-weight: 500;
+    color: white;
+}
+
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #212121;
+    padding: 40px;
+    border-radius: 12px;
+    /* Increased radius */
+    z-index: 1001;
+    min-width: 500px;
+    /* Increased min width */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    /* Refined shadow */
+    transition: all 0.3s ease;
+}
+
+
+.modal-content h3 {
+    color: #42a5f5;
+    margin-bottom: 30px;
+    /* Increased margin */
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.form-group label {
+    margin-bottom: 8px;
+    color: #cfcfcf;
+    font-weight: 500;
+}
+
+
+.form-group input {
+    padding: 14px;
+    border: 1px solid #4a4a4a;
+    border-radius: 6px;
+    background-color: #333333;
+    color: #f0f0f0;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.form-group input:focus {
+    border-color: #42a5f5;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(66, 165, 245, 0.3);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    /* Increased gap */
+}
+
+.save-button,
+.cancel-button,
+.delete-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.save-button:before,
+.cancel-button:before,
+.delete-button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+}
+
+.save-button:hover:before,
+.cancel-button:hover:before,
+.delete-button:hover:before {
+    transform: translateX(0);
+}
+
+.save-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+
+.save-button:hover {
+    background-color: #1e7e34;
+    transform: translateY(-3px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+.cancel-button {
+    background-color: #f44336;
+    color: white;
+}
+
+
+.cancel-button:hover {
+    background-color: #d32f2f;
+    transform: translateY(-3px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+    transform: translateY(-3px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Overlay to cover background when modal is open */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+
+/* Loading State Message */
+.loading-message {
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+    color: #42a5f5;
+}
+
+
+/* Error Message */
+.error-message {
+    text-align: center;
+    color: #f44336;
+    margin-top: 20px;
+}
+
+
+/* No Address Message */
+.no-addresses-message {
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+    color: #cfcfcf;
+}

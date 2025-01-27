@@ -1,0 +1,42 @@
+[
+  {
+    "ContainingType": "BikeVille.Controllers.MongoDbController",
+    "Method": "GetAllAdmins",
+    "RelativePath": "MongoDb/admins",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[BikeVille.Models.MongoCredentials.AdminCredentials, BikeVille, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "BikeVille.Controllers.MongoDbController",
+    "Method": "GetAllCustomers",
+    "RelativePath": "MongoDb/customers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[BikeVille.Models.MongoCredentials.CustomerCredentials, BikeVille, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+<div class="container" (mousemove)="onMouseMove($event)">
+  <div class="text left-text">RIDE</div>
+  <div class="circle-container">
+    <div class="circle"
+      [ngStyle]="{'background-image': 'url(' + imageUrl + ')', 'background-position': backgroundPosition}">
+    </div>
+  </div>
+  <div class="text right-text">LIVE</div>
+</div>
+
+<!--Scroll down animation-->
+<video class="bottom-animation" autoplay muted loop>
+  <source src="assets/videos/scroll_down_animation.webm" type="video/webm" />
+  Your browser does not support the video tag.
+</video>
+
+<!-- Section for the next content -->
+<div class="next-content">
+  <div class="next-content-wrapper">
+    <div class="text-content">
+      <p>Welcome to BikeVille, where passion for cycling meets cutting-edge innovation. We're more than just an
+        e-commerce site; we're a community of bike enthusiasts dedicated to helping riders of all levels experience the
+        joy of two wheels.</p>
+    </div>
+    <div class="image-content">
+      <img src="assets/images/passion_bike.webp" alt="Cycling Adventure" />
+    </div>
+  </div>
+</div>
+
+<!-- Section for the next content -->
+<div class="next-content">
+  <div class="next-content-wrapper">
+    <div class="image-content">
+      <img src="assets/images/cycling_adventure.jpg" alt="Cycling Adventure" />
+    </div>
+    <div class="text-content">
+      <p>From sleek road bikes to rugged mountain machines, every product we offer is handpicked for quality,
+        durability, and performance. We partner with top brands and emerging innovators to bring you the best the
+        cycling world has to offer.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+import { HeaderBarComponent } from './header-bar/header-bar.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [
+    RouterModule,
+    RouterOutlet,
+    HeaderBarComponent
+  ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'bikeville-frontend';
+}

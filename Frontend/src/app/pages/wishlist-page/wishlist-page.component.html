@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+
+  <!-- Show message when there are no products -->
+  <div *ngIf="products.length == 0" class="empty-message">
+    <p>No wishes were found 😔</p><br>
+    <p>It's time to go wishing 😃</p>
+  </div>
+
+  <!-- Show the table if there are products -->
+  <table *ngIf="products.length > 0" class="product-table">
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td class="image-cell">
+          <img [src]="product.image" [alt]="product.title" />
+          <p>{{ product.title }}</p>
+        </td>
+        <td class="info-cell">
+          <p>{{ product.description }}</p>
+          <p class="price">${{ product.price.toFixed(2) }}</p>
+        </td>
+        <td class="actions-cell">
+          <button (click)="moveToCart(product)" class="btn move-to-cart" title="Move to Cart">
+            <i class="fas fa-cart-plus"></i>
+          </button>
+          <button (click)="deleteProduct(product)" class="btn delete" title="Delete">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
